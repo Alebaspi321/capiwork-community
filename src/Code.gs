@@ -28,7 +28,7 @@ const CONFIG = {
   APP_SUBTITLE: 'Monitoreo, Evaluación y Aprendizaje',
   ADMIN_EMAIL: getScriptSetting_('ADMIN_EMAIL', 'admin@capiwork.example'),
   ADMIN_NAME: getScriptSetting_('ADMIN_NAME', 'Administrador de demostración'),
-  ADMIN_TEMP_PASSWORD: getScriptSetting_('ADMIN_TEMP_PASSWORD', 'CambiarEstaClave2026!'),
+  ADMIN_TEMP_PASSWORD: getScriptSetting_('ADMIN_TEMP_PASSWORD', ''),
   SUPER_ADMIN_EMAILS: getEmailListSetting_('SUPER_ADMIN_EMAILS', ['admin@capiwork.example']),
 
   // Si el proyecto está VINCULADO a la hoja de cálculo, deje esto vacío.
@@ -90,6 +90,7 @@ function doGet() {
   t.LOGO_LOGIN = getAssetDataUrl_(CONFIG.LOGO_LOGIN_FILE_ID, 'login');
   t.LOGO_ICON = getAssetDataUrl_(CONFIG.LOGO_ICON_FILE_ID, 'icon');
   t.LOGO_CENTROS = getAssetDataUrl_(CONFIG.LOGO_CENTROS_FILE_ID, 'centros');
+  t.DESIGN_STYLES = HtmlService.createHtmlOutputFromFile('DesignSystem').getContent();
 
   return t.evaluate()
     .setTitle(CONFIG.APP_NAME + ' | MEL')
@@ -139,6 +140,7 @@ function configurarSistema() {
 
   const existing = findUserByEmail_(CONFIG.ADMIN_EMAIL);
   if (!existing) {
+    if (!CONFIG.ADMIN_TEMP_PASSWORD) throw new Error('Configure ADMIN_TEMP_PASSWORD en las propiedades del script antes de crear el administrador.');
     const salt = Utilities.getUuid();
     authSs.getSheetByName(AUTH_SHEETS.USERS).appendRow([
       Utilities.getUuid(),

@@ -21,6 +21,7 @@ Google Drive.
 
 - `src/Code.gs`: backend de Google Apps Script.
 - `src/Index.html`: interfaz del sistema.
+- `src/DesignSystem.html`: estilo visual de acceso, tableros y módulos.
 - `src/Assets.gs`: recursos gráficos incorporados.
 - `src/appsscript.json`: manifiesto de Apps Script.
 - `docs/ROADMAP.md`: propuesta de evolución del producto.
@@ -45,12 +46,6 @@ Google Drive.
 Nunca publique valores reales de estas propiedades en GitHub. El archivo
 `src/Code.gs` usa datos ficticios como valores de demostración y deja vacíos
 todos los identificadores externos.
-
-## Credenciales de demostración
-
-Los valores de ejemplo son `admin@capiwork.example` y
-`CambiarEstaClave2026!`. Cámbielos mediante Propiedades del script antes de
-usar el sistema fuera de un entorno de prueba.
 
 ## Desarrollo
 
